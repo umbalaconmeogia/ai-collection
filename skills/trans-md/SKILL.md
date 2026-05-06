@@ -44,12 +44,14 @@ The keyword `base` is used to translate back to the "original" or "default" file
 3. **File Writing**:
 
    - For language codes (e.g., `ja`): `[Name].[code].md`.
+   - **Primary Language Exception**: If a target language matches the project's primary language (default: `en`), use the base filename `[Name].md` instead of adding a suffix.
    - For `base` keyword: `[Name].md`.
    - Write files to the same directory as the source.
 4. **Language Nav (Language Switcher)**:
 
    - Insert a navigation line at the top of each file (after Front Matter).
-   - Format: `[Tiếng Việt](README.md) | [English](README.en.md) | [日本語](README.ja.md)`
+   - Format: `[Tiếng Việt](README.md) | [日本語](README.ja.md)`
+   - **De-duplication**: Ensure that each unique file is linked only once. If the primary language is mapped to `README.md`, do not create a separate `[English](README.en.md)` link or file.
    - Ensure the `base` file and all variants are updated to include links to all currently generated versions.
 5. **Internal Link Update**:
 
