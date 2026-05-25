@@ -8,6 +8,7 @@ Thư mục này chứa skill Cursor dùng [REST API của Redmine](https://www.r
 | `README.md` | Hướng dẫn cho bạn (cách gắn skill, biến môi trường, lưu ý bảo mật). |
 | `.env.example` | Mẫu biến; sao chép thành `.env` rồi điền giá trị thật. |
 | `.env` | **Bạn tự tạo** — chứa URL và API key; không commit (đã có `.gitignore`). |
+| `SamplePrompt.md` | Prompt mẫu |
 
 ## Cách dùng trong Cursor
 
