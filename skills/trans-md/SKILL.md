@@ -1,10 +1,10 @@
 ---
 name: trans-md
-description: Translate Markdown documents to multiple languages, including mapping back to a base file (reverse translation).
+description: Translate Markdown documents (README, docs, .md files) into multiple languages, creating language-suffixed variants (e.g. README.ja.md) with a language switcher nav bar, including mapping back to a base file (reverse translation). Use whenever the user runs /trans-md, or asks to translate a README or .md file, create multilingual/localized versions of Markdown docs, add a language switcher, or "dịch file .md / README sang tiếng Anh, tiếng Nhật...".
 ---
 # `trans-md` Skill
 
-This skill allows Antigravity to translate one or more Markdown files from a source language to one or more target languages while managing filenames and creating a language switcher navigation bar.
+This skill allows Claude to translate one or more Markdown files from a source language to one or more target languages while managing filenames and creating a language switcher navigation bar.
 
 ## Trigger
 
@@ -28,7 +28,15 @@ This skill is triggered when:
 The keyword `base` is used to translate back to the "original" or "default" file (the one without a language suffix).
 
 - If the input is `mydoc.vi.md` and the target is `base`, the output will be `mydoc.md`.
-- The content will be translated into the project's primary language (defaults to English).
+- The content will be translated into the project's primary language (see below).
+
+### Determining the Primary Language
+
+The primary language is the language of the base file (`[Name].md`, no suffix). Resolve it in this order:
+
+1. If `[Name].md` already exists, use the language its content is written in.
+2. Otherwise, if the user states the primary language, use that.
+3. Otherwise, default to English (`en`).
 
 ## Workflow
 
@@ -50,7 +58,9 @@ The keyword `base` is used to translate back to the "original" or "default" file
 4. **Language Nav (Language Switcher)**:
 
    - Insert a navigation line at the top of each file (after Front Matter).
-   - Format: `[Tiếng Việt](README.md) | [日本語](README.ja.md)`
+   - Format (primary language `en`): `[English](README.md) | [Tiếng Việt](README.vi.md) | [日本語](README.ja.md)`
+   - Label each link with the language's native name, and use the same link order in every file.
+   - If a nav line already exists at the top of a file, replace it instead of adding a second one.
    - **De-duplication**: Ensure that each unique file is linked only once. If the primary language is mapped to `README.md`, do not create a separate `[English](README.en.md)` link or file.
    - Ensure the `base` file and all variants are updated to include links to all currently generated versions.
 5. **Internal Link Update**:
